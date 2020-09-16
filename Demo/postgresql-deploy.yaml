@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgresql
+  labels:
+    app: drupal
+spec:
+  strategy:
+    type: Recreate
+  selector:
+    matchLabels:
+      app: drupal
+      tier: postgreSQL
+  template:
+    metadata:
+      labels:
+        app: drupal
+        tier: postgreSQL
+    spec:
+      containers:
+        - image: postgres:latest
+          name: postgresql
+          env:
+            - name: POSTGRES_USER
+              value: drupal
+            - name: POSTGRES_DB
+              value: drupal_production
+            - name: POSTGRES_PASSWORD
+              value: drupal
+          ports:
+            - containerPort: 5432
+              name: postgresql
