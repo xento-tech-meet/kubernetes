@@ -1,0 +1,34 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: joomla-deploy
+  labels:
+    app: joomla
+    tier: jooml-deplpoy
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: joomla
+      tier: frontend
+  template:
+    metadata:
+      labels:
+        app: joomla
+        tier: frontend
+    spec:
+      containers:
+        - image: joomla:latest
+          name: joomla
+          ports:
+            - containerPort: 80
+              name: joomla
+          env:
+            - name: JOOMLA_DB_HOST
+              value: mysql-svc
+            - name: JOOMLA_DB_USER
+              value: joomla
+            - name: JOOMLA_DB_PASSWORD
+              value: joomla_123
+            - name: JOOMLA_DB_NAME
+              value: joomla
