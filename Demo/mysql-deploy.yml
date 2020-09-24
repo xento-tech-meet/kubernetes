@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+  labels:
+    app: joomla
+    tier: backend
+spec:
+  selector:
+    matchLabels:
+      app: joomla
+      tier: mysql
+  template:
+    metadata:
+      labels:
+        app: joomla
+        tier: mysql
+    spec:
+      containers:
+        - image: mysql:5.6
+          name: mysql-cnt
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: joomla_123
+            - name: MYSQL_DATABASE
+              value: joomla
+            - name: MYSQL_USER
+              value: joomla
+            - name: MYSQL_PASSWORD
+              value: joomla_123
+          ports:
+            - containerPort: 3306

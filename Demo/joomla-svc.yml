@@ -1,14 +1,16 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: drupal
+  name: joomla-svc
   labels:
-    app: drupal
+    app: joomla
+    tier: joomla-svc
 spec:
   type: NodePort
   ports:
     - port: 80
-      nodePort: 30085
+      targetPort: 80
+      nodePort: 30075
   selector:
-    app: drupal
+    app: joomla
     tier: frontend

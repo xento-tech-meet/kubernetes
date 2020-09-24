@@ -4,7 +4,7 @@ metadata:
   name: joomla-deploy
   labels:
     app: joomla
-    tier: jooml-deplpoy
+    tier: joomla-deploy
 spec:
   replicas: 1
   selector:
